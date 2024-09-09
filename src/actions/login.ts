@@ -2,6 +2,7 @@
 "use server";
 import { LOGIN_POST } from "../utils/api";
 import { cookies } from "next/headers";
+import apiError from "@/utils/api-error";
 
 interface LoginState {
   ok: boolean;
@@ -33,8 +34,16 @@ export async function login(
     });
     console.log("response", response);
     if (!response.ok) throw new Error("Senha ou usuário inválidos.");
-    const data: { token: string } = await response.json();
-    cookies().set("token", data.token, {
+    const data = await response.json();
+    // Concatenar os dados em uma string JSON
+    const cookieData = JSON.stringify({
+      token: data.token,
+      userId: data.userId,
+      roles: data.roles,
+    });
+
+    // Armazenar a string JSON no cookie
+    cookies().set("user_data", cookieData, {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
@@ -42,6 +51,6 @@ export async function login(
     });
     return { ok: true, error: "", data };
   } catch (error) {
-    return { ok: false, error: (error as Error).message, data: null };
+    return apiError(error);
   }
 }
