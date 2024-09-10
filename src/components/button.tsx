@@ -1,11 +1,14 @@
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    label: string;
+    label?: string;
     variant?: 'primary' | 'secondary';
     size?: 'small' | 'medium' | 'large';
+    children: string,
+
 }
 
 const Button: React.FC<ButtonProps> = ({
-    label,
+    children,
     variant = 'primary',
     size = 'medium',
     className = '',
@@ -27,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button className={buttonClassNames} {...buttonProps}>
-            {label}
+            {children}
         </button>
     );
 };

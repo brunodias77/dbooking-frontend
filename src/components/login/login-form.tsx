@@ -7,7 +7,6 @@ import Input from '../input';
 import ErrorMessage from '../error-message';
 import { LoginResponse } from '../../types/login-response';
 
-
 export default function LoginForm() {
     const [state, action] = useFormState(login, {
         ok: false,
@@ -25,19 +24,21 @@ export default function LoginForm() {
             <ErrorMessage error={state.error} />
             <FormButton />
         </form>
-
     );
 }
 
 function FormButton() {
     const { pending } = useFormStatus();
     return (
-        <>
-            {pending ? (
-                <Button disabled={pending} label='Enviando...' className='bg-green-500' />
-            ) : (
-                <Button label='Entrar' className='bg-green-500 w-full' />
-            )}
-        </>
+        <Button className='bg-green-500 w-full'>
+            {pending ? "Enviando..." : "Enviar"}
+        </Button>
+        // <>
+        //     {pending ? (
+        //         <Button disabled={pending} label='Enviando...' className='bg-green-500 w-full' />
+        //     ) : (
+        //         <Button label='Entrar' className='bg-green-500 w-full' />
+        //     )}
+        // </>
     )
 }

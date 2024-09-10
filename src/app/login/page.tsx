@@ -3,8 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 const LoginPage = () => {
     return (
-        <div className='max-w-screen-xl mx-auto flex items-center justify-center  h-full'>
-            <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md p-6 sm:p-8">
+        <div className='max-w-screen-xl h-full mx-auto flex flex-col items-center justify-center'>
+            <div className="animeLeft w-[40%] bg-white rounded-lg shadow p-10">
                 <div className="mb-4 flex justify-center items-center gap-3 text-gray-800 font-bold">
                     <Image
                         src="/assets/dbooking_logo.svg"
