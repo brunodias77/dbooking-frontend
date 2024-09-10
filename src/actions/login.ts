@@ -32,23 +32,32 @@ export async function login(
         password,
       }),
     });
-    console.log("response", response);
+
     if (!response.ok) throw new Error("Senha ou usuário inválidos.");
     const data = await response.json();
-    // Concatenar os dados em uma string JSON
-    const cookieData = JSON.stringify({
-      token: data.token,
-      userId: data.userId,
-      roles: data.roles,
-    });
 
-    // Armazenar a string JSON no cookie
-    cookies().set("user_data", cookieData, {
+    // Armazenar os dados em cookies separados
+    cookies().set("token", data.token, {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
       maxAge: 60 * 60 * 24,
     });
+
+    cookies().set("userEmail", email, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24,
+    });
+
+    cookies().set("roles", JSON.stringify(data.roles), {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24,
+    });
+
     return { ok: true, error: "", data };
   } catch (error) {
     return apiError(error);

@@ -11,11 +11,44 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 10rem);
+  min-height: calc(100vh + 10rem);
 }
 
 .AppBody {
   flex: 1;
+}
+
+.container {
+  max-width: 50rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.mainContainer {
+  margin-top: 2rem;
+}
+
+.animeLeft {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: animeLeft 0.3s forwards;
+}
+
+@keyframes animeLeft {
+  to {
+    opacity: 1;
+    transform: initial;
+  }
+}
+
+/* Oculta o ícone padrão do input[type="date"] */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Para navegadores que não usam Webkit */
+input[type="date"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  appearance: none;
 }

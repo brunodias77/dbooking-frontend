@@ -5,3 +5,9 @@ export function LOGIN_POST() {
     url: API_URL + "/auth/login",
   };
 }
+
+export function REGISTER_POST() {
+  return {
+    url: API_URL + "/auth/register-user",
+  };
+}
